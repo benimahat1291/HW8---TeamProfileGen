@@ -1,3 +1,4 @@
+
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -5,11 +6,11 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+// const OUTPUT_DIR = path.resolve(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
-const { inherits } = require("util");
+// const render = require("./lib/htmlRenderer");
+// const { inherits } = require("util");
 
 //make teamlist to store team members
 var teamMembers_ls = [];
@@ -33,7 +34,7 @@ const managerQ = [
     },
     {
         type: "list",
-        name: "hasname",
+        name: "hasTeam",
         message: "Are there more members to your team?",
         choices: ["Yes", "No"]
     }
@@ -80,14 +81,38 @@ const employeeQ = [
     }
 ] 
 //function to push to teamlist each of the obj we created
+function team_ls_Gen(){
+    inquirer.prompt(employeeQ).then(employee_res => {
+        if(employee_res == "engineer"){
+            var newEmployee = new Engineer(employee_res.name, teamMembers_ls.length + 1, employee_res.email, employee_res.github);
+        }else{
+            var newEmployee = new Intern(employee_res.name, teamMembers_ls.length + 1, employee_res.email, employee_res.school);
+        }
+        teamMembers_ls.push(newEmployee);
+        if(employee_res.addAnother === "Yes"){
+            team_ls_Gen();
+        }else{
+            html_Gen();
+        };
+    });
+
+};
 //function to build the main html page
+function html_Gen(){
+    
+}
 //fimctopm to build to cards for each team member
 //function to initalize
 function init(){
-    inquirer.prompt(managerQ).then(managerInfo => {
-        let teamManager = new Manager(managerInfo.name, managerInfo.email, managerInfo.officeNum);
+    inquirer.prompt(managerQ).then(Manager_res => {
+        let teamManager = new Manager(Manager_res.name, Manager_res.email, Manager_res.officeNum);
         teamMembers_ls.push(teamManager);
         console.log(teamMembers_ls)
+        if (Manager_res.hasTeam === "Yes"){
+            team_ls_Gen();
+        }else{
+            html_Gen();
+        }
     })
 }
  init();

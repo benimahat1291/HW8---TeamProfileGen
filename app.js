@@ -103,11 +103,15 @@ function html_Gen(){
     fs.writeFileSync("./output/teamPage.html", newFile, function(err){
         if(err) throw err;
     });
-    console.log("Page generated"):
+    console.log("Page generated");
 
     for (member of teamMembers_ls){
         if(member.getRole() == "Manager"){
-            card_Gen()
+            card_Gen("manager", member.getName(), member.getId(), member.getEmail(), "Office: " + member.getOfficeNumber);
+        } else if(member.getRole() == "Engineer"){
+            card_Gen("engineer", member.getName(), member.getId(), member.getEmail(), "GitHub: " + member.getGithub());
+        } else if(member.getRole() == "Intern"){
+            card_Gen("intern",member.getName(), member.getId(), member.getEmail(), "School: " + member.getSchool());
         }
     }
 

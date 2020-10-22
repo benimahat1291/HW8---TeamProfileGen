@@ -29,7 +29,7 @@ const managerQ = [
     },
     {
         type: "input",
-        name: "officeNum",
+        name: "officeNumberberber",
         message: "Enter manager's Office Number: ",
     },
     {
@@ -99,13 +99,34 @@ function team_ls_Gen(){
 };
 //function to build the main html page
 function html_Gen(){
+    let newFile = fs.readFileSync("./templates/main.html");
+    fs.writeFileSync("./output/teamPage.html", newFile, function(err){
+        if(err) throw err;
+    });
+    console.log("Page generated"):
+
+    for (member of teamMembers_ls){
+        if(member.getRole() == "Manager"){
+            card_Gen()
+        }
+    }
+
+}
+//function to build to cards for each team member
+function card_Gen(memberType, name, id, email, propertyValue){
+    let info = fs.readFileSync(`./templates/${memberType}.html`,'utf8');
+    info = info.replace("nameHere", name);
+    info = info.replace("idHere", `ID: ${id}`);
+    info = info.replace("emailHere", `Email: ${email}`)
+    info = info.replace("propertyHere", propertyValue);
+    fs.appendFileSync("./output/teamPage.html", info, err => { if (err) throw err;})
+    console.log("Card appended");
     
 }
-//fimctopm to build to cards for each team member
 //function to initalize
 function init(){
     inquirer.prompt(managerQ).then(Manager_res => {
-        let teamManager = new Manager(Manager_res.name, Manager_res.email, Manager_res.officeNum);
+        let teamManager = new Manager(Manager_res.name, Manager_res.email, Manager_res.officeNumberberber);
         teamMembers_ls.push(teamManager);
         console.log(teamMembers_ls)
         if (Manager_res.hasTeam === "Yes"){
@@ -116,39 +137,3 @@ function init(){
     })
 }
  init();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```

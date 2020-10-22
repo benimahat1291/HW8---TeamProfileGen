@@ -29,7 +29,7 @@ const managerQ = [
     },
     {
         type: "input",
-        name: "officeNumberberber",
+        name: "officeNumber",
         message: "Enter manager's Office Number: ",
     },
     {
@@ -55,7 +55,7 @@ const employeeQ = [
         type: "list",
         name: "role",
         message: "what is employee's role? ",
-        chocie: ["engineer", "intern"]
+        choices: ["engineer", "intern"]
     },
     {
         when: input => {
@@ -83,7 +83,7 @@ const employeeQ = [
 //function to push to teamlist each of the obj we created
 function team_ls_Gen(){
     inquirer.prompt(employeeQ).then(employee_res => {
-        if(employee_res == "engineer"){
+        if(employee_res.role == "engineer"){
             var newEmployee = new Engineer(employee_res.name, teamMembers_ls.length + 1, employee_res.email, employee_res.github);
         }else{
             var newEmployee = new Intern(employee_res.name, teamMembers_ls.length + 1, employee_res.email, employee_res.school);
@@ -107,13 +107,16 @@ function html_Gen(){
 
     for (member of teamMembers_ls){
         if(member.getRole() == "Manager"){
-            card_Gen("manager", member.getName(), member.getId(), member.getEmail(), "Office: " + member.getOfficeNumber);
+            card_Gen("manager", member.getName(), member.getId(), member.getEmail(), "Office: " + member.getOfficeNumber());
         } else if(member.getRole() == "Engineer"){
             card_Gen("engineer", member.getName(), member.getId(), member.getEmail(), "GitHub: " + member.getGithub());
         } else if(member.getRole() == "Intern"){
             card_Gen("intern",member.getName(), member.getId(), member.getEmail(), "School: " + member.getSchool());
         }
     }
+
+    fs.appendFileSync("./output/teamPage.html", "</div><main></body></html>", function (err){
+        if (err) throw err});
 
 }
 //function to build to cards for each team member
@@ -130,7 +133,7 @@ function card_Gen(memberType, name, id, email, propertyValue){
 //function to initalize
 function init(){
     inquirer.prompt(managerQ).then(Manager_res => {
-        let teamManager = new Manager(Manager_res.name, Manager_res.email, Manager_res.officeNumberberber);
+        let teamManager = new Manager(Manager_res.name, Manager_res.email, Manager_res.officeNumber);
         teamMembers_ls.push(teamManager);
         console.log(teamMembers_ls)
         if (Manager_res.hasTeam === "Yes"){

@@ -77,7 +77,7 @@ const employeeQ = [
         type: "list",
         name: "addAnother",
         message: "would you like to add another team member?",
-        choices: ["yes", "No"]
+        choices: ["Yes", "No"]
     }
 ] 
 //function to push to teamlist each of the obj we created
@@ -107,11 +107,11 @@ function html_Gen(){
 
     for (member of teamMembers_ls){
         if(member.getRole() == "Manager"){
-            card_Gen("manager", member.getName(), member.getId(), member.getEmail(), "Office: " + member.getOfficeNumber());
+            card_Gen("manager", member.getName(), member.getId(), member.getEmail(), member.getOfficeNumber());
         } else if(member.getRole() == "Engineer"){
-            card_Gen("engineer", member.getName(), member.getId(), member.getEmail(), "GitHub: " + member.getGithub());
+            card_Gen("engineer", member.getName(), member.getId(), member.getEmail(),member.getGithub());
         } else if(member.getRole() == "Intern"){
-            card_Gen("intern",member.getName(), member.getId(), member.getEmail(), "School: " + member.getSchool());
+            card_Gen("intern",member.getName(), member.getId(), member.getEmail(), member.getSchool());
         }
     }
 
@@ -120,20 +120,27 @@ function html_Gen(){
 
 }
 //function to build to cards for each team member
-function card_Gen(memberType, name, id, email, propertyValue){
-    let info = fs.readFileSync(`./templates/${memberType}.html`,'utf8');
-    info = info.replace("nameHere", name);
-    info = info.replace("idHere", `ID: ${id}`);
-    info = info.replace("emailHere", `Email: ${email}`)
-    info = info.replace("propertyHere", propertyValue);
-    fs.appendFileSync("./output/teamPage.html", info, err => { if (err) throw err;})
-    console.log("Card appended");
+function card_Gen(role, name, id, email, propertyValue){
+    let info = fs.readFileSync(`./templates/${role}.html`,'utf8');
+
+    info = info.replace("{{ name }}", name);
+    info = info.replace("{{ id }}", id);
+    info = info.replace("{{ email }}", email)
+    info = info.replace("{{ email2 }}", email)
+    info = info.replace("{{ school }}", propertyValue);
+    info = info.replace("{{ officeNumber }}", propertyValue)
+    info = info.replace("{{ github }}", propertyValue);
+    info = info.replace("{{ github2 }}", propertyValue);
+
+    fs.appendFileSync("./output/teamPage.html", info, err => { if (err) throw err;});
+    console.log(name + " " + id + " " + email + " " + propertyValue);
     
-}
+};
+
 //function to initalize
 function init(){
     inquirer.prompt(managerQ).then(Manager_res => {
-        let teamManager = new Manager(Manager_res.name, Manager_res.email, Manager_res.officeNumber);
+        let teamManager = new Manager(Manager_res.name, teamMembers_ls.length + 1, Manager_res.email, Manager_res.officeNumber);
         teamMembers_ls.push(teamManager);
         console.log(teamMembers_ls)
         if (Manager_res.hasTeam === "Yes"){

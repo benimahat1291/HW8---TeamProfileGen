@@ -1,48 +1,53 @@
-# Unit 10 OOP Homework: Template Engine - Employee Summary
-One of the most important aspects of programming is writing code that is readable, reliable, and maintainable. Oftentimes, *how* we design our code is just as important as the code itself. In this homework assignment, your challenge is to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, you will also be ensuring that all unit tests pass.
+# Team profile generator
 
-## Instructions
-build a software engineering team generator command line application. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. This assignment must also pass all unit tests. When the user has completed building the team, the application will create an HTML file that displays a nicely formatted team roster based on the information provided by the user.
-```
-As a manager
-I want to generate a webpage that displays my team's basic info
-so that I have quick access to emails and GitHub profiles
-```
-* Given following templates:
-  * `main.html`
-  * `engineer.html`
-  * `intern.html`
-  * `manager.html`
+## Description
+This application uses inquirer to prompt the user for information about their project team. Then our html is dynamicaly updated with the information the user provided. 
 
-## Minimum Requirements
-* Functional application.
-* GitHub repository with a unique name and a README describing the project.
-* User can use the CLI to generate an HTML page that displays information about their team.
-* All tests must pass.
+## Direction
+* HTML was provided with areas to insert information
+* Create employee manager intern student classes
+* In stall inquirer and run prompt
+* Build objects passing in our information 
+* Replace Html information from our object
 
-### Classes
-  * name
-  * id
-  * email
-  * getName()
-  * getId()
-  * getEmail()
-  * getRole() // Returns 'Employee'
+## technologies used
+* inquirer
 
-### Roster output
-The project must generate a `team.html` page in the `output` directory, that displays a nicely formatted team roster. Each team member should display the following in no particular order:
-  * Name
-  * Role
-  * ID
-  * Role-specific property (School, link to GitHub profile, or office number)
+## Directory Files
+* lib
+  >Employee.js
+  >Engineer.js
+  >htmlRenderer.js
+  >Intern.js
+  >Manager.js
+* node_modules (npm install from package manager)
+* output
+  >teamPage.html
+* templates
+  >engineer.html
+  >intern.html
+  >main.html
+  >manager.html
+* test
+  >Employee.test.js
+  >Engineer.test.js
+  >Intern.test.js
+  >Manager.test.js
+* package-lock.json (npm install from package manager)
+* package.json
+* app.js
+* README.md
 
-### Apporach
-  * Ask inquirer questions
-  * write to cards given information
-  * write Cards to html
+## deployment directions
+* run "npm run install" in bash terminal to get package-lock.json and node_modules
+* run prompt with "node app.js"
 
-### Developer 
-Beni Mahat 10/20/2020
+## Chalanges
+* build code with test requirements
+* Learn how to build classes
+* Learn syntax of inquirer and asyc functions
+* Updating the html was hard, didn't understand htmlrenderer.js so used replace instead
 
+## Developer
 
-
+Beni Mahat 10/25/2020

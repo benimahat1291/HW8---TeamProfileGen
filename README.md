@@ -40,7 +40,7 @@ A node application that uses inquirer to prompt the user for information about t
 
 ## Usage
 
-in the command line, run "node app.js". you will be prompted on what you would like to do with questions about your team. You will provide the infromation about the manager first, then you can add employees and interns and their information. Once you have added all of your team members the "teamPage.html" file in the output folder of the directory will be updated with the information you provided. This process can be repeated mulitple times making it an efficent way to make a profile of your team members and thier roles. 
+in the command line, run "node app.js" you will be prompted on what you would like to do with questions about your team. You will provide the infromation about the manager first, then you can add employees and interns and their information. Once you have added all of your team members the "teamPage.html" file in the output folder of the directory will be updated with the information you provided. This process can be repeated mulitple times making it an efficent way to make a profile of your team members and thier roles. 
  
 
 ## Technologies Used

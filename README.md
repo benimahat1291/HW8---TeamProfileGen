@@ -1,53 +1,63 @@
 # Team profile generator
 
+
+# Express: Employee tracker
+
+## Table of Contents
+
+* [Description](#description)
+* [Links](#links)
+* [Screenshots](#screenshots)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Technologies Used](#technologies)
+* [Questions](#questions)
+
 ## Description
-This application uses inquirer to prompt the user for information about their project team. Then our html is dynamicaly updated with the information the user provided. 
 
-## Direction
-* HTML was provided with areas to insert information
-* Create employee manager intern student classes
-* In stall inquirer and run prompt
-* Build objects passing in our information 
-* Replace Html information from our object
+A node application that uses inquirer to prompt the user for information about their project team. Then htmlpage with employee information is dynamicaly updated with the information the user provided. 
 
-## technologies used
-* inquirer
+## Links
 
-## Directory Files
-* lib
-  >Employee.js
-  >Engineer.js
-  >htmlRenderer.js
-  >Intern.js
-  >Manager.js
-* node_modules (npm install from package manager)
-* output
-  >teamPage.html
-* templates
-  >engineer.html
-  >intern.html
-  >main.html
-  >manager.html
-* test
-  >Employee.test.js
-  >Engineer.test.js
-  >Intern.test.js
-  >Manager.test.js
-* package-lock.json (npm install from package manager)
-* package.json
-* app.js
-* README.md
+[View a Video Demonstration](https://drive.google.com/file/d/1pZe9rv7e_biqpArJgBVZpk54LglbVVnp/view)
 
-## deployment directions
-* run "npm run install" in bash terminal to get package-lock.json and node_modules
+
+## Screenshots
+
+
+![ Search:](images/sc1.png)
+![ Login/Signup:](/images/sc2.png)
+![View all:](images/sc3.png)
+![View all:](images/sc4.png)
+![View all:](images/sc5.png)
+
+
+
+## Installation Instructions
+
+* run "npm run install" in terminal to get package-lock.json and node_modules
 * run prompt with "node app.js"
 
-## Chalanges
-* build code with test requirements
-* Learn how to build classes
-* Learn syntax of inquirer and asyc functions
-* Updating the html was hard, didn't understand htmlrenderer.js so used replace instead
+## Usage
 
-## Developer
+in the command line, run "node app.js". you will be prompted on what you would like to do with questions about your team. You will provide the infromation about the manager first, then you can add employees and interns and their information. Once you have added all of your team members the "teamPage.html" file in the output folder of the directory will be updated with the information you provided. This process can be repeated mulitple times making it an efficent way to make a profile of your team members and thier roles. 
+ 
 
-Beni Mahat 10/25/2020
+## Technologies Used
+
+node, express, inquirer, mysql
+
+## Questions
+
+If you have further projects and questions, you can find me on Github: [GITHUB](https://github.com/benimahat1291). 
+please visit my portfolio to find contact information: [BENI MAHAT](https://benimahat1291.github.io/Portfolio_v2/#/). 
+
+
+
+
+
+
+
+
+
+
